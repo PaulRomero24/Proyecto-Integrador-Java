@@ -1,9 +1,10 @@
-package Proyecto;
+package Utilidades;
 
 
-import Clases.Jugadores;
 import java.util.ArrayList;
 import java.util.List;
+
+import Proyecto.Jugadores;
 
 public class Ranking {
     private static final int MAX_JUGADORES = 100;

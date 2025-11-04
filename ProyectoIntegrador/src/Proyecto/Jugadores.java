@@ -1,4 +1,4 @@
-package Clases;
+package Proyecto;
 
 public class Jugadores {
     private String nombre;
