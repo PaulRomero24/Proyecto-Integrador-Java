@@ -1,9 +1,6 @@
 package Utilidades;
 
-/**
- * Clase de utilidad con métodos estáticos para operaciones comunes en el juego.
- * No se instancia (constructor privado).
- */
+
 public class Utilidades {
 
     // Constructor privado para evitar instanciación
@@ -11,7 +8,7 @@ public class Utilidades {
         throw new UnsupportedOperationException("Clase de utilidad: no se puede instanciar");
     }
 
-    public static int letraAColumna(char letra) {
+    public static int letraAColumna(char letra) { //ESTO ES POR EL TAMAÑO DEL TABLERO
         return switch (letra) {
             case 'A' -> 0;
             case 'B' -> 1;
@@ -54,7 +51,7 @@ public class Utilidades {
             return null;
         }
 
-        // Validar rangos
+        // Validar rangos, para que no se salga del TABLERO DISEÑADO
         if (columna < 0 || columna > 7 || fila < 0 || fila > 7) {
             return null;
         }

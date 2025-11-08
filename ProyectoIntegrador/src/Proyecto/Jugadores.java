@@ -1,6 +1,7 @@
 package Proyecto;
 
 public class Jugadores {
+    //ATRIBUTOS ENCAPSULADOS que solo es accesible desde la clase actual.
     private String nombre;
     private int puntaje;
     //CONSTRUCTOR

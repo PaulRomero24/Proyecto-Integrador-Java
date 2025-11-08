@@ -3,14 +3,14 @@ package Proyecto;
 import java.util.Random;
 
 public class Tablero {
-    //VARIABLES PARA EL TABLERO
+    //ATRIBUTOS ENCAPSULADOS PARA EL TABLERO
     private static final int FILAS = 8;
     private static final int COLUMNAS = 8;
 
-
-    private int[][] barcos;          // 0 = agua, 1/2/3 = tipo de barco, -1 = ya tocado
-    private char[][] vistaJugador;   // '?', 'X', 'O', '#'
-    private int[][] copiaOriginal;   // para mostrar al final
+    //Matrices ENCAPSULADAS(arrays bidimensionales)
+    private int[][] barcos;          
+    private char[][] vistaJugador;   
+    private int[][] copiaOriginal;   
 
     //UTILIDAD PARA EL ALEATORIO
     private final Random random = new Random();
@@ -20,7 +20,7 @@ public class Tablero {
         this.barcos = new int[FILAS][COLUMNAS];
         this.vistaJugador = new char[FILAS][COLUMNAS];
         this.copiaOriginal = new int[FILAS][COLUMNAS];
-        Inicializamos();
+        Inicializamos(); //INVOCACION de un metodo
     }
     
     //CREACION DEL TABLERO
@@ -37,11 +37,11 @@ public class Tablero {
         colocarBarco(TipoBarco.SUBMARINO);
         colocarBarco(TipoBarco.CRUCERO);
         colocarBarco(TipoBarco.DESTRUCTOR);
-        copiarBarcos();
+        copiarBarcos();//INVOCACION de un metodo
     }
 
     //IMPORTAMOS LOS METODOS DE LA CLASE "TIPO BARCO"
-    private void colocarBarco(TipoBarco tipo){
+    private void colocarBarco(TipoBarco tipo){//ACA EMPIEZA EL METODO
         int tamaño = tipo.getTamaño();
         int id = tipo.toId();
         boolean colocado = false;
@@ -81,18 +81,35 @@ public class Tablero {
                 }
             }
         }
-    }
+    }//MIRAR LA LLAVES,ACA TERMINA EL METODO
+
+/**"El bucle while (!colocado) repite intentos aleatorios de colocación hasta que se logra posicionar el barco.
+Dentro de cada intento:
+
+Se generan coordenadas y orientación (horizontal/vertical) aleatorias.
+Mediante un bucle for anidado, se verifica si todas las celdas requeridas están libres (es decir, contienen 0).
+Si están libres, un segundo bucle for anidado asigna el id del barco en esas posiciones.
+Estos bucles for están anidados dentro del while, y su ejecución depende de la orientación y disponibilidad del espacio."* 
+
+ */
+    
 
 
-    //METODO PARA UBICAR EL BARCO EN EL TABLERO
+    //METODO PARA: crea una copia de seguridad del estado actual del tablero (barcos) en "copiaOriginal".
     private void copiarBarcos(){
         for (int i = 0; i < FILAS; i++) {
             System.arraycopy(barcos[i], 0, copiaOriginal[i], 0, COLUMNAS);
         }
     }
+    /**
+ * Crea una copia profunda del estado actual de los barcos en 'copiaOriginal'.
+ * Útil para restaurar el tablero original posteriormente (por ejemplo, al reiniciar la partida).
+ */
 
+
+    
     /*-------------SISTEMA DE DISPAROS-------------*/
-
+        /*Ciclo condicional que verifica si el barco fue golpeado o hundido en el tablero */
     public boolean disparar(int fila, int columna) {
         if (fila < 0 || fila >= FILAS || columna < 0 || columna >= COLUMNAS) {
             return false;
@@ -104,14 +121,16 @@ public class Tablero {
         if (valor == 0) {
             vistaJugador[fila][columna] = 'O';
         } else {
-            vistaJugador[fila][columna] = 'X'; // ¡solo cambia la vista!
+            vistaJugador[fila][columna] = 'X'; 
             if (barcoHundido(valor)) {
-                marcarHundido(valor); // ahora sí usa 'valor'
+                marcarHundido(valor); 
             }
         }
         return true;
     }
-
+        
+    /* Ciclos for recorre la matriz y verifica si el barco fue golpeado en su totalidad,
+    para mostrarlo hundido*/
     private boolean barcoHundido(int tipo) {
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {
@@ -133,7 +152,7 @@ public class Tablero {
         }
     }
 
-
+    /*Ciclo que recorre el tablero para verificar si quedan barcos sin hundir */
     public boolean juegoFinalizado() {
         for (int i = 0; i < FILAS; i++) {
             for (int j = 0; j < COLUMNAS; j++) {

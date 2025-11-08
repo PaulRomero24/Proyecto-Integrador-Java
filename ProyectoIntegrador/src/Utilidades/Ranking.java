@@ -1,12 +1,12 @@
 package Utilidades;
 
 
+import Proyecto.Jugadores;
 import java.util.ArrayList;
 import java.util.List;
 
-import Proyecto.Jugadores;
-
 public class Ranking {
+    //ESTABLECEMOS EL MAXIMO DEL RANKING
     private static final int MAX_JUGADORES = 100;
     private final List<Jugadores> jugadores;
 
@@ -58,12 +58,12 @@ public class Ranking {
         int limite = Math.min(10, jugadores.size());
         for (int i = 0; i < limite; i++) {
             Jugadores j = jugadores.get(i);
-            if (j.getPuntaje() <= 0) break; // como en PSeInt: no mostrar puntajes <= 0
+            if (j.getPuntaje() <= 0) break;
 
             // Formato de posición
             String pos = (i < 9) ? " " + (i + 1) + ".   " : (i + 1) + ".   ";
 
-            // Formato de nombre (máx 17 caracteres + "...")
+            /*  Formato de nombre,No mostrara mas de 17 caracteres*/
             String nombre = j.getNombre();
             if (nombre.length() > 17) {
                 nombre = nombre.substring(0, 17) + "...";
